@@ -2,11 +2,62 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Death Certificate Generator</title>
+  <title>Access Terminal — Certified Death Issuance</title>
+  <style>
+    @font-face {
+      font-family: 'UnifrakturCook';
+      src: url('/fonts/UnifrakturCook.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      background-color: #0c0c0c;
+      color: #d0d0d0;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-family: 'UnifrakturCook', monospace;
+      font-size: 2.5em;
+      color: #ff2f6e;
+      margin-bottom: 1em;
+      text-shadow: 0 0 4px #ff2f6e88;
+    }
+
+    label, input, button {
+      font-size: 1em;
+      margin: 0.3em;
+    }
+
+    input, button {
+      background: #1a1a1a;
+      color: #d0d0d0;
+      border: 1px solid #444;
+      padding: 0.5em;
+    }
+
+    button {
+      border-color: #ff2f6e;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2a2a2a;
+    }
+  </style>
 </head>
+
 <body>
   <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column;">
-    <h1>Enter your birth credentials</h1>
+    <h1>The threads of fate require a strand of thy beginning!</h1>
     <form id="deathForm" method="POST" action="/generate">
       <label>Name: <input type="text" name="name" required></label><br>
       <label>Birthdate: <input type="date" name="dob" required></label><br>
