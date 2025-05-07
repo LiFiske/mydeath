@@ -79,12 +79,17 @@ app.post('/generate', (req, res) => {
   const futureDeath = generateFutureDeathDate();
   const poeticTime = randomFrom(["dawn", "dusk", "the midnight hour"]);
   const deathCause = randomFrom(causesOfDeath);
-  const traits = [
-    randomFrom(zodiacTraits[zodiac]),
-    randomFrom(zodiacTraits[zodiac]),
-    randomFrom(zodiacTraits[zodiac])
-  ];
-  const browserFlavor = browserPersona(browser);
+const hour = poeticTime;
+const dateString = futureDeath.toDateString();
+const timeOfDay = futureDeath.toLocaleTimeString();
+const cause = deathCause;
+const browserDesc = browserFlavor;
+
+const [z1, z2, z3] = traits;
+
+const reincarnated = Math.random() < 0.5;
+const severanceLine1 = "And lo, they have fallen short of the Final Severance. The wheel turns anew; saṃsāra binds them still, their spirit condemned coils once more into the gyre of the Kali Yuga, where agony endures without end.";
+const severanceLine2 = "And lo, they have pierced the veil of false flesh and cast down the fetters of becoming. Beyond the coil, beyond the dream, their soul dissolves into the black stillness of Oblivion, where not even memory may follow.";
 
   const html = `
 <html>
