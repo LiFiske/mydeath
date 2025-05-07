@@ -1,4 +1,5 @@
 app.post('/generate', (req, res) => {
+  console.log("FORM DATA", req.body); // <-- this will show exactly what came through
   const { name, dob, location, ip, browser, timezone } = req.body;
 
   const birthDate = new Date(dob);
