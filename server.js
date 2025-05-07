@@ -1,3 +1,14 @@
+app.post('/generate', (req, res) => {
+  const { name, dob, location, ip, browser, timezone } = req.body;
+
+  const birthDate = new Date(dob);
+  const now = new Date();
+  const age = now.getFullYear() - birthDate.getFullYear();
+
+  const month = birthDate.getMonth() + 1;
+  const day = birthDate.getDate();
+  const zodiac = getZodiac(month, day);
+
 const html = `
   <html>
     <head>
@@ -54,5 +65,7 @@ const html = `
     </body>
   </html>
 `;
-res.set('Content-Type', 'text/html');
-res.send(html)
+
+  res.set('Content-Type', 'text/html');
+  res.send(html)
+});
