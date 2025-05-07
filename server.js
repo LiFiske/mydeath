@@ -19,6 +19,7 @@ app.post('/generate', (req, res) => {
   const zodiac = getZodiac(month, day);
 
   const html = `
+  <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; text-align: center;">
     <h1>${name}'s Death Certificate</h1>
     <p><strong>Born on:</strong> ${dob}</p>
     <p><strong>Died on:</strong> ${now.toLocaleString()} (${timezone})</p>
@@ -27,7 +28,9 @@ app.post('/generate', (req, res) => {
     <p><strong>Location:</strong> ${location}</p>
     <p><strong>IP Address:</strong> ${ip}</p>
     <p><strong>Browser:</strong> ${browser}</p>
-  `;
+  </div>
+`;
+
 
   res.send(html);
 });

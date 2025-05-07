@@ -5,19 +5,21 @@
   <title>Death Certificate Generator</title>
 </head>
 <body>
-  <h1>Enter your birth credentials</h1>
-  <form id="deathForm" method="POST" action="/generate">
-    <label>Name: <input type="text" name="name" required></label><br>
-    <label>Birthdate: <input type="date" name="dob" required></label><br>
+  <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column;">
+    <h1>Enter your birth credentials</h1>
+    <form id="deathForm" method="POST" action="/generate">
+      <label>Name: <input type="text" name="name" required></label><br>
+      <label>Birthdate: <input type="date" name="dob" required></label><br>
 
-    <!-- Hidden fields for metadata -->
-    <input type="hidden" id="location" name="location">
-    <input type="hidden" id="ip" name="ip">
-    <input type="hidden" id="browser" name="browser">
-    <input type="hidden" id="timezone" name="timezone">
+      <!-- Hidden fields for metadata -->
+      <input type="hidden" id="location" name="location">
+      <input type="hidden" id="ip" name="ip">
+      <input type="hidden" id="browser" name="browser">
+      <input type="hidden" id="timezone" name="timezone">
 
-    <button type="submit">Submit</button>
-  </form>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 
   <script>
     const form = document.getElementById('deathForm');
