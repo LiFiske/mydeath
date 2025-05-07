@@ -30,3 +30,5 @@ const html = `
     </body>
   </html>
 `;
+res.set('Content-Type', 'text/html');
+res.send(html)
