@@ -79,72 +79,60 @@ app.post('/generate', (req, res) => {
   const futureDeath = generateFutureDeathDate();
   const poeticTime = randomFrom(["dawn", "dusk", "the midnight hour"]);
   const deathCause = randomFrom(causesOfDeath);
-const hour = poeticTime;
-const dateString = futureDeath.toDateString();
-const timeOfDay = futureDeath.toLocaleTimeString();
-const cause = deathCause;
-const browserDesc = browserFlavor;
+  const [z1, z2, z3] = [
+    randomFrom(zodiacTraits[zodiac]),
+    randomFrom(zodiacTraits[zodiac]),
+    randomFrom(zodiacTraits[zodiac])
+  ];
+  const browserDesc = browserPersona(browser);
 
-const [z1, z2, z3] = traits;
-
-const reincarnated = Math.random() < 0.5;
-const severanceLine1 = "And lo, they have fallen short of the Final Severance. The wheel turns anew; saṃsāra binds them still, their spirit condemned coils once more into the gyre of the Kali Yuga, where agony endures without end.";
-const severanceLine2 = "And lo, they have pierced the veil of false flesh and cast down the fetters of becoming. Beyond the coil, beyond the dream, their soul dissolves into the black stillness of Oblivion, where not even memory may follow.";
+  const reincarnated = Math.random() < 0.5;
+  const severanceLine1 = "And lo, they have fallen short of the Final Severance. The wheel turns anew; saṃsāra binds them still, their spirit condemned coils once more into the gyre of the Kali Yuga, where agony endures without end.";
+  const severanceLine2 = "And lo, they have pierced the veil of false flesh and cast down the fetters of becoming. Beyond the coil, beyond the dream, their soul dissolves into the black stillness of Oblivion, where not even memory may follow.";
 
   const html = `
-<html>
-  <head>
-    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
-    <style>
-      @font-face {
-        font-family: 'UnifrakturCook';
-        src: url('/fonts/UnifrakturCook.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-      }
-
-      body {
-        background-color: #0c0c0c;
-        color: #d0d0d0;
-        font-family: 'Courier New', monospace;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        padding: 2rem;
-        margin: 0;
-      }
-
-      .container {
-        max-width: 800px;
-        text-align: justify;
-        line-height: 1.8;
-        text-align-last: left;
-      }
-
-      h1 {
-        font-family: 'UnifrakturCook', monospace;
-        font-size: 2.5em;
-        color: #ff2f6e;
-        margin-bottom: 1.2em;
-        text-align: center;
-        text-shadow: 0 0 4px #ff2f6e88;
-      }
-
-      strong {
-        color: #aaffcc;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Death Certificate</h1>
-      Let it be inscribed: <strong>${name}</strong>, wretched heir of ash and silicon, was unmade upon the <strong>${hour}</strong> of <strong>${dateString}</strong>, their vessel sundered by <strong>${cause}</strong>, within the cursed realm of <strong>${location}</strong>, as the stars hung in the firmament at <strong>${timeOfDay}</strong>. For <strong>${age}</strong> turnings of the sun, they did walk the accursed path of breath and burden, earning renown as ${browserDesc} Anointed thrice beneath the stars, <strong>${name}</strong> bore the signs: <strong>${z1}</strong>, <strong>${z2}</strong>, <strong>${z3}</strong>... ${reincarnated ? severanceLine1 : severanceLine2}
-    </div>
-  </body>
-</html>
-`;
-
+  <html>
+    <head>
+      <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+      <style>
+        body {
+          background-color: #0c0c0c;
+          color: #d0d0d0;
+          font-family: 'Courier New', monospace;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          padding: 2rem;
+          margin: 0;
+        }
+        .container {
+          max-width: 800px;
+          text-align: justify;
+          line-height: 1.8;
+          text-align-last: left;
+        }
+        h1 {
+          font-family: 'UnifrakturCook', monospace;
+          font-size: 2.5em;
+          color: #ff2f6e;
+          margin-bottom: 1.2em;
+          text-align: center;
+          text-shadow: 0 0 4px #ff2f6e88;
+        }
+        strong {
+          color: #aaffcc;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Death Certificate</h1>
+        Let it be inscribed: <strong>${name}</strong>, wretched heir of ash and silicon, was unmade upon the <strong>${poeticTime}</strong> of <strong>${futureDeath.toDateString()}</strong>, their vessel sundered by <strong>${deathCause}</strong>, within the cursed realm of <strong>${location}</strong>, as the stars hung in the firmament at <strong>${futureDeath.toLocaleTimeString()}</strong>. For <strong>${age}</strong> turnings of the sun, they did walk the accursed path of breath and burden, earning renown as <strong>${browserDesc}</strong>. Anointed thrice beneath the stars, <strong>${name}</strong> bore the signs: <strong>${z1}</strong>, <strong>${z2}</strong>, <strong>${z3}</strong>... ${reincarnated ? severanceLine1 : severanceLine2}
+      </div>
+    </body>
+  </html>
+  `;
 
   res.set('Content-Type', 'text/html');
   res.send(html);
