@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>Enter your birth credentials</h1>
-  <form id="deathForm" method="POST">
+  <form id="deathForm" method="POST" action="/generate">
     <label>Name: <input type="text" name="name" required></label><br>
     <label>Birthdate: <input type="date" name="dob" required></label><br>
 
@@ -19,29 +19,28 @@
     <button type="submit">Submit</button>
   </form>
 
-<script>
-  const form = document.getElementById('deathForm');
+  <script>
+    const form = document.getElementById('deathForm');
 
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
 
-    try {
-      const res = await fetch("https://ipapi.co/json");
-      const data = await res.json();
+      try {
+        const res = await fetch("https://ipapi.co/json");
+        const data = await res.json();
 
-      document.getElementById("location").value = `${data.city}, ${data.region}, ${data.country_name}`;
-      document.getElementById("ip").value = data.ip;
-      document.getElementById("browser").value = navigator.userAgent;
-      document.getElementById("timezone").value = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.getElementById("location").value = `${data.city}, ${data.region}, ${data.country_name}`;
+        document.getElementById("ip").value = data.ip;
+        document.getElementById("browser").value = navigator.userAgent;
+        document.getElementById("timezone").value = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-      // Now safely submit the form
-      form.submit();
-    } catch (err) {
-      console.error("Metadata fetch failed:", err);
-      form.submit(); // still submit even if metadata fails
-    }
-  });
-</script>
-
+        // Short delay to ensure fields are written before submit
+        setTimeout(() => form.submit(), 100);
+      } catch (err) {
+        console.error("Metadata fetch failed:", err);
+        form.submit();
+      }
+    });
+  </script>
 </body>
 </html>
