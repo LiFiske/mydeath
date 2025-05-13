@@ -123,6 +123,73 @@ app.post('/generate', (req, res) => {
         strong {
           color: #aaffcc;
         }
+    body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    rgba(255, 255, 255, 0.03) 0px,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  z-index: 2;
+}
+
+.glitch {
+  position: relative;
+  color: #ff2f6e;
+  font-family: 'UnifrakturCook', monospace;
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 1.2em;
+  text-shadow: 0 0 4px #ff2f6e88;
+  z-index: 3;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  overflow: hidden;
+  color: #ff79c6;
+  background: transparent;
+}
+
+.glitch::before {
+  animation: glitchTop 2s infinite linear alternate-reverse;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  z-index: 4;
+}
+
+.glitch::after {
+  animation: glitchBottom 2s infinite linear alternate-reverse;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  z-index: 5;
+}
+
+@keyframes glitchTop {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, -2px); }
+  40% { transform: translate(2px, 0); }
+  60% { transform: translate(-1px, 1px); }
+  80% { transform: translate(1px, -1px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes glitchBottom {
+  0% { transform: translate(0); }
+  20% { transform: translate(1px, 1px); }
+  40% { transform: translate(-2px, 0); }
+  60% { transform: translate(2px, -1px); }
+  80% { transform: translate(-1px, 1px); }
+  100% { transform: translate(0); }
+}
+
       </style>
     </head>
     <body>
