@@ -111,90 +111,79 @@ app.post('/generate', (req, res) => {
           text-align: justify;
           line-height: 1.8;
           text-align-last: left;
+          position: relative;
+          z-index: 1;
         }
-        h1 {
+        .glitch {
+          position: relative;
+          color: #ff2f6e;
           font-family: 'UnifrakturCook', monospace;
           font-size: 2.5em;
-          color: #ff2f6e;
-          margin-bottom: 1.2em;
           text-align: center;
+          margin-bottom: 1.2em;
           text-shadow: 0 0 4px #ff2f6e88;
+          z-index: 3;
+        }
+        .glitch::before,
+        .glitch::after {
+          content: attr(data-text);
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          overflow: hidden;
+          color: #ff79c6;
+          background: transparent;
+          z-index: -1;
+        }
+        .glitch::before {
+          animation: glitchTop 2s infinite linear alternate-reverse;
+          clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        }
+        .glitch::after {
+          animation: glitchBottom 2s infinite linear alternate-reverse;
+          clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+        }
+        @keyframes glitchTop {
+          0% { transform: translate(0); }
+          20% { transform: translate(-2px, -2px); }
+          40% { transform: translate(2px, 0); }
+          60% { transform: translate(-1px, 1px); }
+          80% { transform: translate(1px, -1px); }
+          100% { transform: translate(0); }
+        }
+        @keyframes glitchBottom {
+          0% { transform: translate(0); }
+          20% { transform: translate(1px, 1px); }
+          40% { transform: translate(-2px, 0); }
+          60% { transform: translate(2px, -1px); }
+          80% { transform: translate(-1px, 1px); }
+          100% { transform: translate(0); }
+        }
+        body::after {
+          content: "";
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          pointer-events: none;
+          background-image: repeating-linear-gradient(
+            rgba(255, 255, 255, 0.03) 0px,
+            rgba(255, 255, 255, 0.03) 1px,
+            transparent 1px,
+            transparent 4px
+          );
+          z-index: 0;
         }
         strong {
           color: #aaffcc;
         }
-    body::after {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  pointer-events: none;
-  background-image: repeating-linear-gradient(
-    rgba(255, 255, 255, 0.03) 0px,
-    rgba(255, 255, 255, 0.03) 1px,
-    transparent 1px,
-    transparent 4px
-  );
-  z-index: 2;
-}
-
-.glitch {
-  position: relative;
-  color: #ff2f6e;
-  font-family: 'UnifrakturCook', monospace;
-  font-size: 2.5em;
-  text-align: center;
-  margin-bottom: 1.2em;
-  text-shadow: 0 0 4px #ff2f6e88;
-  z-index: 3;
-}
-
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  overflow: hidden;
-  color: #ff79c6;
-  background: transparent;
-}
-
-.glitch::before {
-  animation: glitchTop 2s infinite linear alternate-reverse;
-  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-  z-index: 4;
-}
-
-.glitch::after {
-  animation: glitchBottom 2s infinite linear alternate-reverse;
-  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-  z-index: 5;
-}
-
-@keyframes glitchTop {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, -2px); }
-  40% { transform: translate(2px, 0); }
-  60% { transform: translate(-1px, 1px); }
-  80% { transform: translate(1px, -1px); }
-  100% { transform: translate(0); }
-}
-
-@keyframes glitchBottom {
-  0% { transform: translate(0); }
-  20% { transform: translate(1px, 1px); }
-  40% { transform: translate(-2px, 0); }
-  60% { transform: translate(2px, -1px); }
-  80% { transform: translate(-1px, 1px); }
-  100% { transform: translate(0); }
-}
-
       </style>
     </head>
     <body>
       <div class="container">
-        <h1>Death Certificate</h1>
+        <h1 class="glitch" data-text="Death Certificate">Death Certificate</h1>
         Let it be inscribed: <strong>${name}</strong>, wretched heir of ash and silicon, was unmade upon the <strong>${poeticTime}</strong> of <strong>${futureDeath.toDateString()}</strong>, their vessel sundered by <strong>${deathCause}</strong>, within the cursed realm of <strong>${location}</strong>, as the stars hung in the firmament at <strong>${futureDeath.toLocaleTimeString()}</strong>. For <strong>${age}</strong> turnings of the sun, they did walk the accursed path of breath and burden, earning renown as <strong>${browserDesc}</strong>. Anointed thrice beneath the stars, <strong>${name}</strong> bore the signs: <strong>${z1}</strong>, <strong>${z2}</strong>, <strong>${z3}</strong>... ${reincarnated ? severanceLine1 : severanceLine2}
       </div>
     </body>
