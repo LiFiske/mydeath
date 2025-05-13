@@ -53,6 +53,45 @@
       background-color: #2a2a2a;
     }
 
+    form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 400px;
+  width: 100%;
+  margin-top: 1em;
+}
+
+label {
+  text-align: left;
+  color: #aaaaaa;
+  font-size: 0.9em;
+}
+
+input, button {
+  background-color: #1a1a1a;
+  color: #d0d0d0;
+  border: 1px solid #444;
+  padding: 0.5em;
+  font-family: 'Courier New', monospace;
+  font-size: 1em;
+  border-radius: 4px;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+input:focus, button:hover {
+  border-color: #ff2f6e;
+  background-color: #2a2a2a;
+  outline: none;
+}
+
+button {
+  font-weight: bold;
+  color: #ff2f6e;
+  cursor: pointer;
+}
+
+
     .veil {
   position: fixed;
   top: 0;
@@ -76,8 +115,10 @@
   To glimpse what lies ahead unveil what once was
 </h1>
     <form id="deathForm" method="POST" action="/generate">
-      <label>Name: <input type="text" name="name" required></label><br>
-      <label>Birthdate: <input type="date" name="dob" required></label><br>
+      <label>Your True Name:<input type="text" name="name" required></label><br>
+      <label>The Date When You First Drew Breath: <input type="date" name="dob" required></label><br>
+      <label>Confess What You Fear Most:<input type="text" name="fear" placeholder="e.g. the void, being known, small talk"></label>
+
 
       <!-- Hidden fields for metadata -->
       <input type="hidden" id="location" name="location">
