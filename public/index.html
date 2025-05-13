@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <title>Access Terminal — Certified Death Issuance</title>
   <style>
+    @font-face {
+      font-family: 'UnifrakturCook';
+      src: url('/fonts/UnifrakturCook.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     body {
       background-color: #0c0c0c;
       color: #d0d0d0;
@@ -18,96 +25,100 @@
     }
 
     h1 {
-      font-size: 1.8em;
+      font-family: 'UnifrakturCook', monospace;
+      font-size: 2.5em;
       color: #ff2f6e;
-      margin-bottom: 1.5em;
-      max-width: 600px;
+      margin-bottom: 1em;
       text-shadow: 0 0 4px #ff2f6e88;
     }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-      width: 100%;
-      max-width: 400px;
-    }
-
-    label {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-      font-size: 0.95em;
-      color: #aaa;
+    label, input, button {
+      font-size: 1em;
+      margin: 0.3em;
     }
 
     input, button {
       background: #1a1a1a;
       color: #d0d0d0;
       border: 1px solid #444;
-      padding: 0.6em;
-      font-family: 'Courier New', monospace;
-      font-size: 1em;
-      border-radius: 4px;
-    }
-
-    input:focus, button:hover {
-      border-color: #ff2f6e;
-      outline: none;
-      background-color: #2a2a2a;
+      padding: 0.5em;
     }
 
     button {
+      border-color: #ff2f6e;
       cursor: pointer;
-      font-weight: bold;
-      color: #ff2f6e;
     }
+
+    button:hover {
+      background-color: #2a2a2a;
+    }
+
+    .veil {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(20, 20, 20, 0.9) 0%, rgba(5, 5, 5, 1) 100%);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  z-index: 1000;
+  transition: opacity 2.5s ease;
+}
+
   </style>
 </head>
+
 <body>
-  <h1>To glimpse what lies ahead unveil what once was</h1>
+  <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column;">
+   <h1 class="glitch" data-text="To glimpse what lies ahead unveil what once was">
+  To glimpse what lies ahead unveil what once was
+</h1>
+    <form id="deathForm" method="POST" action="/generate">
+      <label>Name: <input type="text" name="name" required></label><br>
+      <label>Birthdate: <input type="date" name="dob" required></label><br>
 
-  <form action="/generate" method="POST">
-    <label>
-      Name:
-      <input type="text" name="name" required>
-    </label>
+      <!-- Hidden fields for metadata -->
+      <input type="hidden" id="location" name="location">
+      <input type="hidden" id="ip" name="ip">
+      <input type="hidden" id="browser" name="browser">
+      <input type="hidden" id="timezone" name="timezone">
 
-    <label>
-      Birthdate:
-      <input type="date" name="dob" required pattern="\d{4}-\d{2}-\d{2}">
-    </label>
-
-    <label>
-      What is your greatest fear?
-      <input type="text" name="fear">
-    </label>
-
-    <!-- Hidden fields for metadata -->
-    <input type="hidden" id="location" name="location">
-    <input type="hidden" id="ip" name="ip">
-    <input type="hidden" id="browser" name="browser">
-    <input type="hidden" id="timezone" name="timezone">
-
-    <button type="submit">Submit</button>
-  </form>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 
   <script>
-    async function enrichForm() {
-      try {
-        const res = await fetch("https://ipapi.co/json");
-        const data = await res.json();
+  async function enrichForm() {
+    try {
+      const res = await fetch("https://ipapi.co/json");
+      const data = await res.json();
 
-        document.getElementById("location").value = `${data.city}, ${data.region}, ${data.country_name}`;
-        document.getElementById("ip").value = data.ip;
-        document.getElementById("browser").value = navigator.userAgent;
-        document.getElementById("timezone").value = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      } catch (err) {
-        console.error("Metadata fetch failed:", err);
-      }
+      document.getElementById("location").value = `${data.city}, ${data.region}, ${data.country_name}`;
+      document.getElementById("ip").value = data.ip;
+      document.getElementById("browser").value = navigator.userAgent;
+      document.getElementById("timezone").value = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    } catch (err) {
+      console.error("Metadata fetch failed:", err);
     }
+  }
 
-    enrichForm();
-  </script>
+  enrichForm();
+
+  // Step 3: animate veil on form submission
+  document.querySelector("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const veil = document.getElementById("veil");
+    veil.style.opacity = "1";
+
+    setTimeout(() => {
+      e.target.submit();
+    }, 2500);
+  });
+</script>
+
+  <div class="veil" id="veil"></div>
+
 </body>
 </html>

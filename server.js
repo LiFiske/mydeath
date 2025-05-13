@@ -69,7 +69,9 @@ function getZodiac(month, day) {
 app.post('/generate', (req, res) => {
   const { name, dob, location, ip, browser, timezone } = req.body;
 
-  const birthDate = new Date(dob);
+  const birthYear = parseInt(dob, 10);
+  const now = new Date();
+  const age = now.getFullYear() - birthYear;
   const now = new Date();
   const age = now.getFullYear() - birthDate.getFullYear();
   const month = birthDate.getMonth() + 1;
