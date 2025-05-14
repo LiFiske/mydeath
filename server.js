@@ -179,6 +179,24 @@ app.post('/generate', (req, res) => {
         strong {
           color: #aaffcc;
         }
+
+    .veil {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(ellipse at center, rgba(20, 20, 20, 0.9) 0%, rgba(5, 5, 5, 1) 100%);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  animation: fadeVeil 2.5s ease forwards;
+}
+
+@keyframes fadeVeil {
+  0% { opacity: 1; }
+  100% { opacity: 0; pointer-events: none; }
+}
+
       </style>
     </head>
     <body>
