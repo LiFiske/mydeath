@@ -196,6 +196,56 @@ app.post('/generate', (req, res) => {
   0% { opacity: 1; }
   100% { opacity: 0; pointer-events: none; }
 }
+    .crt::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    rgba(255, 255, 255, 0.03) 0px,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  z-index: 999;
+  animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.1; }
+  50% { opacity: 0.15; }
+  100% { opacity: 0.05; }
+}
+
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #ff2f6e;
+  animation: typing 4s steps(80, end), blink 0.5s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+form button {
+  background-color: #1a1a1a;
+  color: #ff2f6e;
+  border: 1px solid #ff2f6e;
+  padding: 0.5em 1em;
+  font-family: 'Courier New', monospace;
+  border-radius: 4px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+form button:hover {
+  background-color: #2a2a2a;
+}
 
       </style>
     </head>
@@ -204,6 +254,9 @@ app.post('/generate', (req, res) => {
         <h1 class="glitch" data-text="Death Certificate">Death Certificate</h1>
         Let it be inscribed: <strong>${name}</strong>, wretched heir of ash and silicon, was unmade upon the <strong>${poeticTime}</strong> of <strong>${futureDeath.toDateString()}</strong>, their vessel sundered by <strong>${deathCause}</strong>, within the cursed realm of <strong>${location}</strong>, as the stars hung in the firmament at <strong>${futureDeath.toLocaleTimeString()}</strong>. For <strong>${age}</strong> turnings of the sun, they did walk the accursed path of breath and burden, earning renown as <strong>${browserDesc}</strong>. Anointed thrice beneath the stars, <strong>${name}</strong> bore the signs: <strong>${z1}</strong>, <strong>${z2}</strong>, <strong>${z3}</strong>... ${reincarnated ? severanceLine1 : severanceLine2}
      <div class="veil"></div>
+<form action="/" method="GET" style="margin-top: 2rem;">
+  <button type="submit">Summon Another</button>
+</form>
 
       </div>
     </body>

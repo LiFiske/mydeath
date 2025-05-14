@@ -110,56 +110,65 @@ button {
 </head>
 
 <body>
-  <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column;">
-   <h1 class="glitch" data-text="To glimpse what lies ahead unveil what once was">
-  To glimpse what lies ahead unveil what once was
-</h1>
-    <form id="deathForm" method="POST" action="/generate">
-      <label>Your True Name:<input type="text" name="name" required></label><br>
-      <label>The Date When You First Drew Breath: <input type="date" name="dob" required></label><br>
-      <label>Confess What You Fear Most:<input type="text" name="fear" placeholder="e.g. the void, being known, small talk"></label>
+  <div class="crt">
+    <div class="container" style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column;">
+      
+      <h1 class="glitch" data-text="To glimpse what lies ahead unveil what once was">
+        To glimpse what lies ahead unveil what once was
+      </h1>
 
+      <form id="deathForm" method="POST" action="/generate">
+        <label>Your True Name:
+          <input type="text" name="name" required>
+        </label><br>
 
-      <!-- Hidden fields for metadata -->
-      <input type="hidden" id="location" name="location">
-      <input type="hidden" id="ip" name="ip">
-      <input type="hidden" id="browser" name="browser">
-      <input type="hidden" id="timezone" name="timezone">
+        <label>The Date When You First Drew Breath:
+          <input type="date" name="dob" required>
+        </label><br>
 
-      <button type="submit">Submit</button>
-    </form>
+        <label>Confess What You Fear Most:
+          <input type="text" name="fear" placeholder="e.g. the void, being known, small talk">
+        </label>
+
+        <!-- Hidden fields for metadata -->
+        <input type="hidden" id="location" name="location">
+        <input type="hidden" id="ip" name="ip">
+        <input type="hidden" id="browser" name="browser">
+        <input type="hidden" id="timezone" name="timezone">
+
+        <button type="submit">Submit</button>
+      </form>
+
+    </div>
   </div>
-
-  <script>
-  async function enrichForm() {
-    try {
-      const res = await fetch("https://ipapi.co/json");
-      const data = await res.json();
-
-      document.getElementById("location").value = `${data.city}, ${data.region}, ${data.country_name}`;
-      document.getElementById("ip").value = data.ip;
-      document.getElementById("browser").value = navigator.userAgent;
-      document.getElementById("timezone").value = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    } catch (err) {
-      console.error("Metadata fetch failed:", err);
-    }
-  }
-
-  enrichForm();
-
-  // Step 3: animate veil on form submission
-  document.querySelector("form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    const veil = document.getElementById("veil");
-    veil.style.opacity = "1";
-
-    setTimeout(() => {
-      e.target.submit();
-    }, 2500);
-  });
-</script>
 
   <div class="veil" id="veil"></div>
 
+  <script>
+    async function enrichForm() {
+      try {
+        const res = await fetch("https://ipapi.co/json");
+        const data = await res.json();
+        document.getElementById("location").value = `${data.city}, ${data.region}, ${data.country_name}`;
+        document.getElementById("ip").value = data.ip;
+        document.getElementById("browser").value = navigator.userAgent;
+        document.getElementById("timezone").value = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      } catch (err) {
+        console.error("Metadata fetch failed:", err);
+      }
+    }
+
+    enrichForm();
+
+    document.querySelector("form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const veil = document.getElementById("veil");
+      veil.style.opacity = "1";
+      setTimeout(() => {
+        e.target.submit();
+      }, 2500);
+    });
+  </script>
 </body>
+
 </html>
