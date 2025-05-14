@@ -196,7 +196,7 @@ app.post('/generate', (req, res) => {
   0% { opacity: 1; }
   100% { opacity: 0; pointer-events: none; }
 }
-    .crt::before {
+    body.crt::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
@@ -218,6 +218,9 @@ app.post('/generate', (req, res) => {
   100% { opacity: 0.05; }
 }
 
+    .crt { position: relative; z-index: 1; }
+
+
 form button {
   background-color: #1a1a1a;
   color: #ff2f6e;
@@ -233,8 +236,9 @@ form button:hover {
 
       </style>
     </head>
-    <body>
-    <div class="crt">
+  <body class="crt">
+  <div class="container">
+
       <div class="container">
         <h1 class="glitch" data-text="Death Certificate">Death Certificate</h1>
        
