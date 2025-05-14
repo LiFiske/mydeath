@@ -218,22 +218,6 @@ app.post('/generate', (req, res) => {
   100% { opacity: 0.05; }
 }
 
-.typewriter {
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 2px solid #ff2f6e;
-  animation: typing 20s steps(1000, end), blink 0.5s step-end infinite;
-}
-
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink {
-  50% { border-color: transparent; }
-}
-
 form button {
   background-color: #1a1a1a;
   color: #ff2f6e;
@@ -253,9 +237,9 @@ form button:hover {
     <div class="crt">
       <div class="container">
         <h1 class="glitch" data-text="Death Certificate">Death Certificate</h1>
-       <p class="typewriter">
+       
   Let it be inscribed: <strong>${name}</strong>, wretched heir of ash and silicon, was unmade upon the <strong>${poeticTime}</strong> of <strong>${futureDeath.toDateString()}</strong>, their vessel sundered by <strong>${deathCause}</strong>, within the cursed realm of <strong>${location}</strong>, as the stars hung in the firmament at <strong>${futureDeath.toLocaleTimeString()}</strong>. For <strong>${age}</strong> turnings of the sun, they did walk the accursed path of breath and burden, earning renown as <strong>${browserDesc}</strong>. Anointed thrice beneath the stars, <strong>${name}</strong> bore the signs: <strong>${z1}</strong>, <strong>${z2}</strong>, <strong>${z3}</strong>... ${reincarnated ? severanceLine1 : severanceLine2}
-</p>
+
 
      <div class="veil"></div>
 <form action="/" method="GET" style="margin-top: 2rem;">
