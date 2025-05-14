@@ -222,7 +222,7 @@ app.post('/generate', (req, res) => {
   overflow: hidden;
   white-space: nowrap;
   border-right: 2px solid #ff2f6e;
-  animation: typing 4s steps(80, end), blink 0.5s step-end infinite;
+  animation: typing 20s steps(1000, end), blink 0.5s step-end infinite;
 }
 
 @keyframes typing {
@@ -250,6 +250,7 @@ form button:hover {
       </style>
     </head>
     <body>
+    <div class="crt">
       <div class="container">
         <h1 class="glitch" data-text="Death Certificate">Death Certificate</h1>
        <p class="typewriter">
